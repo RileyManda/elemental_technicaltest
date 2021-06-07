@@ -22,13 +22,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function validate_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  $data = explode(',', $_POST['to_sort']);
-	sort($data);
-	echo implode(',', $data);  
-  return $data;
+	if(empty($data)) {
+		echo "Form cannot be empty!";
+	} else{
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		$data = explode(',', $_POST['to_sort']);
+		  sort($data);
+		  echo implode(',', $data);  
+		  
+		return $data;
+	}
+
+
+
+
+ 
 }
 
 ?>
@@ -39,18 +49,23 @@ function validate_input($data) {
 <html>
 <head>
 	<title>Test1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	<h1>Sort List</h1>
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<input type="hidden" name="action" value="sort" />
 		<label for="to_sort">Please enter the words/phrases to be sorted separated by commas:</label><br/>
-		<textarea name="to_sort" id="to_sort" type="text" style="width: 400px; height: 150px;" ></textarea><br/>
+		<textarea name="to_sort" id="to_sort" type="text" style="width: 400px; height: 150px;"  require></textarea><br/>
 		<input type="submit" value="Sort" name="submit" />
 	</form>
 
 	<?php
 echo "<h2>Your Phrases:</h2>";
+if(empty($field_email)) {
+    // maybe show the user a reason why this was rejected...
+    return;
+}
 print_r( $to_sort , TRUE);
 echo "<br>";
 ?>
