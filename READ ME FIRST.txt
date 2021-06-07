@@ -1,0 +1,26 @@
+In this folder you'll have the following files:
+
+data.js
+db.php
+devtest.sql
+jquery.js
+test1.php
+test2.php
+test3.php
+test4.html
+
+INSTRCUCTIONS:
+-------------
+Create a database and import devtest.sql
+Configure the db details in db.php
+
+Do test1.php using php to achieve the results.
+Do test2.php using php and mysql to achieve the results.
+Do test3.php using php and mysql to achieve the results.
+Do test4.html using only vanila javascript or jquery - no plugins!
+
+Instructions for each test is located a the top within each file.
+
+Please note, the expected output for test2 and test3 can be found in the ExpectedOutput folder.
+
+Please test and make sure everything is working perfectly.
