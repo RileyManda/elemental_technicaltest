@@ -14,24 +14,64 @@
  *
  * See test2.html for desired result.
  */
+session_start();
+require_once('db.php');    
+require_once('helper.php');  
+include('layout/header.php');
+include('layout/footer.php');
+// $sql = "SELECT p.* from products p";
+
+$sql = "SELECT * FROM categories GROUP BY category";
+
+
+
+// SELECT cid.* from products p
+// INNER JOIN categories cid ON cid.id = p.category_id;
+// SELECT cid.* from products p
+// INNER JOIN categories cid ON cid.id = p.category_id;
+
+//filter:-Show Categories
+// $sql = "SELECT p.*, c.* from products p , categories c
+// WHERE p.category_id = c.id";
+
+    $handle = $con->prepare($sql);
+    $handle->execute();
+    $getAllProducts = $handle->fetchAll(PDO::FETCH_ASSOC);
+
+$pageTitle = "Products";
+$metaDesc = "Product List";
 ?>
-<?php
-//$con holds the connection
-require_once('db.php');
-session_start();  
-require_once('.helper.php'); 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Test2</title>
-</head>
-<body>
-<h1>Products</h1>
 
+<div class="row">
+        <?php
+        foreach($getAllProducts as $product)
+        {
+            // $imgUrl = PRODUCT_IMG_URL.str_replace(' ','-',strtolower($product['product_name']));
+        ?>
+            <div class="col-md-3  mt-2">
+                <div class="card">
+                  
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="category.php?product=<?php echo $product['id'] ?>">
+                                <?php echo $product['product']; ?>
+                            </a>
+                        </h5>
+                        <strong>$ <?php echo $product['price']?></strong>
 
-
-
-
-</body>
-</html>
+                        <p class="card-t">
+                            <?php echo substr($product['category_id'],0,50) ?>'...
+                        </p>
+                        <p class="card-text">
+                            <a href="category.php?product=<?php echo $product['id']?>" class="btn btn-primary btn-sm">
+                                Show Category
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <?php 
+        }
+        ?>
+    </div>
+<?php include('layout/footer.php');?>
