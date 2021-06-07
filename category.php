@@ -18,7 +18,7 @@ INNER JOIN categories cid ON cid.category = p.category_id WHERE cid.category =:c
         $handle = $con->prepare($sql);
         $params = [
                 ':category'=>1,
-                ':category_id' =>$_GET['product']
+                ':category_id' =>$_GET['name']
             ];
         $handle->execute($params);
         if($handle->rowCount() == 1 )
