@@ -18,6 +18,8 @@
 <?php
 //$con holds the connection
 require_once('db.php');
+session_start();  
+require_once('.helper.php'); 
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,6 +28,7 @@ require_once('db.php');
 </head>
 <body>
 <h1>Products</h1>
+
 
 
 
