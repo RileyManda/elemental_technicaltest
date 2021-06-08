@@ -13,16 +13,75 @@ Please make sure your code runs as effectively as it can.
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>Test4</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="jquery.js" ></script>
     <script type="text/javascript" src="data.js" ></script>
+   
 </head>
 <body>
-	<h1>Search Customers</h1>
-    <div class="data-container">
 
-    </div>
-    <script type="text/javascript">
-        console.log(customers);
-    </script>
+        <div class="container">
+            <h1 class="text text-success text-center ">
+                Search Customers
+            </h1>
+            <input class="form-control"type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..">
+            <br>
+            <table id="table"  class="table-striped border-success">
+                <thead>
+                <tr>
+                    <th data-field="name">
+                    <span class="text-success">
+                        Employee Name
+                    </span>
+                    </th>
+                    <th data-field="birthdate">
+                    <span class="text-success">
+                        Joining Date
+                    </span>
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <script>
+            function myFunction() {
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("table");
+              tr = table.getElementsByTagName("tr");
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }       
+              }
+            }
+            </script>
+        <script src=
+        "https://code.jquery.com/jquery-3.3.1.min.js">
+        </script>
+        <script src=
+        "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+        </script>
+        <script src=
+        "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+        </script>
+        <script src=
+        "https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js">
+        </script>
+           <script type="text/javascript">
+            console.log(customers);
+        </script>
+        </script>
+
+ 
 </body>
 </html>

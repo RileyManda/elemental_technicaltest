@@ -5,8 +5,6 @@
     
     if(isset($_GET['product']) && !empty($_GET['product']) && is_numeric($_GET['product']))
     {
-        // $sql = "SELECT p.* from products p
-        //      ON pdi.category_id = p.id WHERE p.id =:category_id";
 
 
 $sql = "SELECT p.* from products p

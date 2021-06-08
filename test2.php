@@ -22,14 +22,14 @@ include('layout/footer.php');
 // $sql = "SELECT * FROM categories GROUP BY category";
 // $sql = "SELECT * FROM categories INNER JOIN products WHERE categories = category_id" ;
 
-$sql = "SELECT *
-FROM products p
-CROSS JOIN categories c WHERE p.category_id = c.id ORDER BY category ASC;
-SELECT *
-FROM p, c;";
+$sql = "SELECT * FROM categories group BY category ASC";
+
+
+    
     $handle = $con->prepare($sql);
     $handle->execute();
-    $getAllProducts = $handle->fetchAll(PDO::FETCH_ASSOC);
+    // $getAllProducts = $handle->fetchAll(PDO::FETCH_ASSOC);
+    $getAllCategories = $handle->fetchAll(PDO::FETCH_ASSOC);
 
 $pageTitle = "Categories";
 $metaDesc = "Categories List";
@@ -37,39 +37,104 @@ $metaDesc = "Categories List";
 
 <div class="row">
         <?php
-        foreach($getAllProducts as $product)
+        foreach($getAllCategories as $category)
         {
+
         ?>
             <div class="col-md-3  mt-2">
                 <div class="card">
                   
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="category.php?product=<?php echo $product['id'] ?>">
-                                <?php echo $product['category']; ?>
+                            <a href="category.php?product=<?php echo $category['id'] ?>">
+                                <?php echo $category['category']; ?>
                             </a>
                         </h5>
+                        
                         <p class="card-t">
-                            <p> Product</p>
-                            <?php 
-                            
-                            echo $product['product'];
-                            ?>
-                            <p> Price</p>
-                             <?php 
-                            
-                            echo $product['price'];
-                            ?>
+                        <?php
+                            $sql2="SELECT * FROM products p,categories c WHERE p.category_id = c.id ";
+                         
+                         //echo $category['id'];
+                          
+        
+                            $handle1 = $con->prepare($sql2);
+                            $handle1->execute();
+                            $getAllProducts = $handle1->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach($getAllProducts as $product)
+                                    {
+                                        ?>  
+                                    
+                                  
+                                   
+                                    <li> <?php echo $product['product']; ?>
+                                        <?php echo $product['price']; ?>
+                                        </li>
 
-                            
-                            
-                           
-                        </p>
+                                       
+                                        
+                                    <?php
+                                    }
+                                    ?>             
+                         </p>
+      
                     </div>
                 </div>
             </div>
         <?php 
         }
         ?>
+
+
+
+<?php
+       
+        ?>
+            <div class="col-md-3  mt-2">
+                <div class="card">
+                  
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a>
+                            Uncategorized
+                            </a>
+                        </h5>
+                        
+                        <p class="card-t">
+                        <?php
+
+                        
+                     
+                            $sql3="SELECT * FROM products WHERE category_id is Null"  ?>       
+                              <?php 
+                            
+                            $handle2 = $con->prepare($sql3);
+                            $handle2->execute();
+                            // $getAllProducts = $handle->fetchAll(PDO::FETCH_ASSOC);
+                            $getAllProducts1 = $handle2->fetchAll(PDO::FETCH_ASSOC);
+       
+                                    foreach($getAllProducts1 as $product)
+                                    {
+                                        ?>  
+                                    
+                                    <li>   <?php echo $product['product']; ?> </li>
+                                        
+                                    <?php
+                                    }
+                                    ?>             
+                         </p>
+      
+                    </div>
+                </div>
+            </div>
+        <?php 
+        
+        ?>
+
+
+
+
+
+
     </div>
 <?php include('layout/footer.php');?>

@@ -23,9 +23,22 @@ require_once('db.php');
 <html>
 <head>
 	<title>Test3</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="data.js"></script>
 </head>
 <body>
 <h1>Top Customers per Month</h1>
+
+<table class="table table-striped">
+    <tr  class="bg-info">
+        <th id="name">Name</th>
+        <th>Birthday</th>
+    </tr>
+
+    <tbody id="customers">
+        
+    </tbody>
+</table>
 
 
 
