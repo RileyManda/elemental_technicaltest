@@ -1,5 +1,5 @@
 <?php
-require 'sort.php';
+require 'validate.php';
 /**
  * QUESTION 1
  *
