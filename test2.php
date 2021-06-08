@@ -23,25 +23,21 @@ include('layout/footer.php');
 // $sql = "SELECT * FROM categories INNER JOIN products WHERE categories = category_id" ;
 
 $sql = "SELECT * FROM categories group BY category ASC";
-
-
-    
     $handle = $con->prepare($sql);
     $handle->execute();
     // $getAllProducts = $handle->fetchAll(PDO::FETCH_ASSOC);
     $getAllCategories = $handle->fetchAll(PDO::FETCH_ASSOC);
-
 $pageTitle = "Categories";
 $metaDesc = "Categories List";
 ?>
 
 <div class="row">
+<!-- get each category -->
         <?php
         foreach($getAllCategories as $category)
         {
-
         ?>
-            <div class="col-md-3  mt-2">
+        <div class="col-md-3  mt-2">
                 <div class="card">
                   
                     <div class="card-body">
@@ -103,8 +99,6 @@ $metaDesc = "Categories List";
                         <p class="card-t">
                         <?php
 
-                        
-                     
                             $sql3="SELECT * FROM products WHERE category_id is Null"  ?>       
                               <?php 
                             
@@ -130,11 +124,6 @@ $metaDesc = "Categories List";
         <?php 
         
         ?>
-
-
-
-
-
-
     </div>
+    <!-- apply footer -->
 <?php include('layout/footer.php');?>
