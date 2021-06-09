@@ -9,12 +9,13 @@
 $con = 'mysql:dbname=devtest;host=127.0.0.1';
 $username = 'root';
 $password = '';
+$message = 'Database connection successful';
 
 try
 {
 	$con = new PDO($con,$username,$password);
 	$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	echo "Database connection successfully";
+	echo "<script>console.log('".$message."');</script>";
 }
 catch(PDOException $e)
 {

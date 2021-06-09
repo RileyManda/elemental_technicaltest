@@ -1,5 +1,9 @@
 <?php
 require 'validate.php';
+include('layout/header.php');
+include('layout/footer.php');
+$pageTitle = "Sort Phrases";
+$metaDesc = "Sort Phrases";
 /**
  * QUESTION 1
  *
@@ -24,19 +28,22 @@ require 'validate.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<div class="col-md-3  mt-2">
 	<h1>Sort List</h1>
 	<p>Your Phrases</p>
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<input type="hidden" name="action" value="sort" />
 		<label for="to_sort">Please enter the words/phrases to be sorted separated by commas:</label><br/>
 		<textarea name="to_sort" id="to_sort" type="text" style="width: 400px; height: 150px;"></textarea><br/>
+		<?php echo ""?>
   <br><br>
 		<input type="submit" value="Sort" name="submit" />
 	</form>
-
 	<?php
 print_r( $to_sort , TRUE);
 echo "<br>";
 ?>
+</div>
+	
 </body>
 </html>

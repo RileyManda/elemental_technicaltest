@@ -16,12 +16,11 @@
  */
 session_start();
 require_once('db.php');    
-require_once('helper.php');  
+require_once('inc/helper.php');  
 include('layout/header.php');
 include('layout/footer.php');
-// $sql = "SELECT * FROM categories GROUP BY category";
-// $sql = "SELECT * FROM categories INNER JOIN products WHERE categories = category_id" ;
 
+// Query to search categories table and retrieve categories
 $sql = "SELECT * FROM categories group BY category ASC";
     $handle = $con->prepare($sql);
     $handle->execute();
@@ -30,48 +29,37 @@ $sql = "SELECT * FROM categories group BY category ASC";
 $pageTitle = "Categories";
 $metaDesc = "Categories List";
 ?>
-
 <div class="row">
-<!-- get each category -->
         <?php
         foreach($getAllCategories as $category)
         {
         ?>
         <div class="col-md-3  mt-2">
                 <div class="card">
-                  
                     <div class="card-body">
                         <h5 class="card-title">
+                            <!-- get each category -->
                             <a href="category.php?product=<?php echo $category['id'] ?>">
                                 <?php echo $category['category']; ?>
-                            </a>
+                            </a> 
                         </h5>
-                        
                         <p class="card-t">
+                            <!-- get products -->
                         <?php
-                            $sql2="SELECT * FROM products p,categories c WHERE p.category_id = c.id ";
-                         
-                         //echo $category['id'];
-                          
-        
+                            $id = $category['id'];
+                            $sql2="SELECT * FROM products WHERE category_id = $id";
                             $handle1 = $con->prepare($sql2);
                             $handle1->execute();
                             $getAllProducts = $handle1->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach($getAllProducts as $product)
-                                    {
-                                        ?>  
-                                    
-                                  
-                                   
-                                    <li> <?php echo $product['product']; ?>
-                                        <?php echo $product['price']; ?>
-                                        </li>
-
-                                       
-                                        
-                                    <?php
-                                    }
-                                    ?>             
+                                foreach($getAllProducts as $product)
+                                {
+                                ?>  
+                                <li> <?php echo $product['product']; ?>
+                                    <?php echo $product['price']; ?>
+                                    </li>  
+                                <?php
+                                }
+                        ?>             
                          </p>
       
                     </div>
@@ -80,11 +68,7 @@ $metaDesc = "Categories List";
         <?php 
         }
         ?>
-
-
-
-<?php
-       
+        <?php
         ?>
             <div class="col-md-3  mt-2">
                 <div class="card">
